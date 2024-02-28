@@ -7,6 +7,8 @@ import { usePaginatedTransactions } from "./hooks/usePaginatedTransactions"
 import { useTransactionsByEmployee } from "./hooks/useTransactionsByEmployee"
 import { EMPTY_EMPLOYEE } from "./utils/constants"
 import { Employee } from "./utils/types"
+import mockData from "../src/mock-data.json"
+
 
 export function App() {
   const { data: employees, ...employeeUtils } = useEmployees()
@@ -18,6 +20,7 @@ export function App() {
     () => paginatedTransactions?.data ?? transactionsByEmployee ?? null,
     [paginatedTransactions, transactionsByEmployee]
   )
+  console.log(transactions)
 
 
   const loadAllTransactions = useCallback(async () => {
@@ -42,6 +45,7 @@ export function App() {
   )
 
   useEffect(() => {
+    localStorage.setItem('mockData', JSON.stringify(mockData))
     if (employees === null && !employeeUtils.loading) {
       loadAllTransactions()
     }
@@ -76,7 +80,7 @@ export function App() {
         <div className="RampBreak--l" />
 
         <div className="RampGrid">
-          <Transactions transactions={transactions} />
+          <Transactions transactions={transactions} transactionsLoading={transactionsByEmployeeUtils.loading} />
 
           {transactions !== null && paginatedTransactions?.nextPage && (
             <button
