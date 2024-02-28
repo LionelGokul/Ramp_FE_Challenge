@@ -6,8 +6,8 @@ import {
   Transaction,
   Employee,
 } from "./types"
+import mockData from "../../src/mock-data.json"
 
-const mockData = JSON.parse(localStorage.getItem('mockData') || '')
 
 const TRANSACTIONS_PER_PAGE = 5
 

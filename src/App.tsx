@@ -7,7 +7,6 @@ import { usePaginatedTransactions } from "./hooks/usePaginatedTransactions"
 import { useTransactionsByEmployee } from "./hooks/useTransactionsByEmployee"
 import { EMPTY_EMPLOYEE } from "./utils/constants"
 import { Employee } from "./utils/types"
-import mockData from "../src/mock-data.json"
 
 
 export function App() {
@@ -45,7 +44,6 @@ export function App() {
   )
 
   useEffect(() => {
-    localStorage.setItem('mockData', JSON.stringify(mockData))
     if (employees === null && !employeeUtils.loading) {
       loadAllTransactions()
     }
